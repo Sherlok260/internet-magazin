@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <style>
+        .main {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .menu {
+            display: inline-flex;
+            align-items: center;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            text-align: center;
+            font-family: Arial;
+            font-style: normal;
+            font-size: 20px;
+            color: white;
+            background-color: greenyellow;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <h1>Online Shopping</h1>
+</div>
+<div>
+    <div class="menu">
+        <form action="api/phone">
+            <div>
+                <input type="submit" value="Phones" formmethod="get">
+            </div>
+        </form>
+        <form action="api/notebook">
+            <div>
+                <input type="submit" value="Notebooks">
+            </div>
+        </form>
+        <form action="api/household">
+            <div>
+                <input type="submit" value="Household">
+            </div>
+        </form>
+        <form action="/api/gadjet">
+            <div>
+                <input type="submit" value="Gadjet">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

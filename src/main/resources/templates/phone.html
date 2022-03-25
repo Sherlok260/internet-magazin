@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phone</title>
+  <style>
+    input {
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      font-family: Arial;
+      font-style: normal;
+      font-size: 20px;
+      color: white;
+      background-color: greenyellow;
+      border-radius: 10px;
+    }
+    .back {
+      margin: 10px;
+      padding: 10px;
+      text-align: center;
+      color: white;
+      background-color: red;
+      border-radius: 10px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+  <h1>Phone Shopping</h1>
+</div>
+<div class="menu">
+  <div>
+    <form action="phone/getId" method="get">
+      <div>
+        <input class="idd" type="text" name="id">
+        <input type="submit" name="Get Info">
+      </div>
+    </form>
+    <form action="phone/create" method="post">
+      <div>
+        <input type="text" name="model">
+        <input type="text" name="color">
+        <input type="text" name="ram">
+        <input type="text" name="memory">
+        <input type="text" name="price">
+        <input type="submit" value="create">
+      </div>
+    </form>
+    <form action="api/household">
+      <div>
+        <input type="submit" value="Household">
+      </div>
+    </form>
+    <form action="/api/gadjet">
+      <div>
+        <input type="submit" value="Gadjet">
+      </div>
+    </form>
+  </div>
+  <div>
+    <form class="back" action="/">
+      <div>
+        <input type="submit" value="Back">
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
