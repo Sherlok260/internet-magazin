@@ -1,71 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Phone</title>
+  <meta charset="UTF-8">
+  <title>Phone</title>
   <style>
+    body {
+      background-color: darkgray;
+    }
+
     input {
-      margin: 10px;
+      margin: 0;
+      margin-bottom: 10px;
       padding: 10px;
       text-align: center;
       font-family: Arial;
       font-style: normal;
-      font-size: 20px;
-      color: white;
+      font-size: 15px;
+      color: black;
       background-color: greenyellow;
-      border-radius: 10px;
+      border-radius: 5px;
+      justify-content: center;
+      width: 95%;
     }
+
     .back {
       margin: 10px;
       padding: 10px;
       text-align: center;
       color: white;
-      background-color: red;
-      border-radius: 10px;
+      border-radius: 5px;
       font-size: 20px;
+      width: 80px;
+    }
+
+    .container {
+      margin: 0 auto;
+      border: 1px solid white;
+      background-color: white;
+      margin-top: 30px;
+      border-radius: 3px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      min-height: 30px;
+      margin-bottom: 30px;
+    }
+
+    .container_1 {
+      width: 40%;
+    }
+
+    .container_2 {
+      width: 80%;
+    }
+
+    .butt {
+      width: 80px;
+      margin: 0;
+      padding: 8px;
+      border-radius: 3px;
+      color: white;
+      background-color: green;
+      float: right;
+      font-size: 15px;
+    }
+
+    .create_con {
+      display: none;
+    }
+
+    .create_but {
+      width: 80px;
+    }
+
+    h3 {
+      margin: 0;
+    }
+
+    h4 {
+      margin: 17px;
+    }
+    .card {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 3px;
+      display: flex;
+    }
+
+    .card_main {
+      border: 1px solid blue;
+    }
+
+    .price_but {
+      padding: 0;
+      height: 30px;
+      width: 60px;
+      /* float: right; */
+      align-self: flex-end;
+    }
+
+    .back_but {
+      justify-content: end;
+      margin: 10px;
+      padding: 10px;
+      width: 80px;
     }
   </style>
 </head>
+
 <body>
-<div class="main">
-  <h1>Phone Shopping</h1>
-</div>
-<div class="menu">
+
+<div action="" class="container_1 container">
   <div>
-    <form action="phone/getId" method="get">
-      <div>
-        <input class="idd" type="text" name="id">
-        <input type="submit" name="Get Info">
-      </div>
-    </form>
-    <form action="phone/create" method="post">
-      <div>
-        <input type="text" name="model">
-        <input type="text" name="color">
-        <input type="text" name="ram">
-        <input type="text" name="memory">
-        <input type="text" name="price">
-        <input type="submit" value="create">
-      </div>
-    </form>
-    <form action="api/household">
-      <div>
-        <input type="submit" value="Household">
-      </div>
-    </form>
-    <form action="/api/gadjet">
-      <div>
-        <input type="submit" value="Gadjet">
-      </div>
-    </form>
-  </div>
-  <div>
-    <form class="back" action="/">
-      <div>
-        <input type="submit" value="Back">
-      </div>
-    </form>
+    <div>
+      <input type="button" value="Show" class="butt">
+      <br>
+    </div>
+    <div class="create_con">
+      <form action="phone/create" method="post">
+        <div>
+          <h3>Model</h3>
+          <input type="text" name="model" placeholder="Samsung, Iphone, XioMi....">
+          <h3>Color</h3>
+          <input type="text" name="color">
+          <h3>RAM</h3>
+          <input type="text" name="ram">
+          <h3>Memory</h3>
+          <input type="text" name="memory">
+          <h3>Price: $</h3>
+          <input type="text" name="price">
+          <input type="submit" value="create" class="create_but">
+        </div>
+      </form>
+    </div>
+
   </div>
 </div>
+
+<div class="container container_1">
+
+  <div class="main">
+    <h1>Phone Shopping</h1>
+  </div>
+
+  <div th:each="phone : ${phones}" class="card_main">
+    <div class="card">
+      <img src="phone.jpg" alt="" width="180px" height="180px">
+      <div>
+        <h4>Model: <span th:text="${phone.getModel()}"></span></h4>
+        <h4>Color: <span th:text="${phone.getColor()}"></span></h4>
+        <h4>RAM: <span th:text="${phone.getRam()}"></span></h4>
+        <h4>Memory: <span th:text="${phone.getMemory()}"></span></h4>
+        <h4>Price: <span th:text="${phone.getPrice()}"></span></h4>
+      </div>
+      <input type="submit" value="Shop" class="price_but">
+    </div>
+  </div>
+  <form action="back" method="get">
+    <input type="submit" value="Back" class="back_but">
+  </form>
+</div>
+<script>
+  let a = false;
+  let butt = document.querySelector(".butt");
+  let create_con = document.querySelector(".create_con");
+  butt.addEventListener('click', function () {
+    console.log("bosildi");
+    a = !a;
+    console.log(a);
+    if (a === true) {
+      console.log("true ekan");
+      create_con.style.display = 'block';
+      butt.value = "Close";
+      butt.style.backgroundColor = "red";
+    } else {
+      create_con.style.display = "none";
+      butt.value = "Show";
+      butt.style.backgroundColor = "green";
+    }
+  })
+
+  console.log("nima gap");
+</script>
 </body>
+
 </html>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Phone</title>-->
+<!--  <style>-->
+<!--    input {-->
+<!--      margin: 10px;-->
+<!--      padding: 10px;-->
+<!--      text-align: center;-->
+<!--      font-family: Arial;-->
+<!--      font-style: normal;-->
+<!--      font-size: 20px;-->
+<!--      color: white;-->
+<!--      background-color: greenyellow;-->
+<!--      border-radius: 10px;-->
+<!--    }-->
+<!--    .back {-->
+<!--      margin: 10px;-->
+<!--      padding: 10px;-->
+<!--      text-align: center;-->
+<!--      color: white;-->
+<!--      border-radius: 10px;-->
+<!--      font-size: 20px;-->
+<!--    }-->
+<!--    .container {-->
+<!--      border: 1px solid blue;-->
+<!--      width: 50%;-->
+<!--      background-color: red;-->
+<!--      margin-top: 30px;-->
+<!--      border-radius: 10px;-->
+<!--      align-items: center;-->
+<!--      justify-content: center;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+
+
+
+<!--<container class="container">-->
+<!--<h1>nima gap</h1>-->
+<!--</container>-->
+
+
+
+
+
+
+
+<!--<div class="main">-->
+<!--  <h1>Phone Shopping</h1>-->
+<!--</div>-->
+<!--<div class="menu">-->
+<!--  <div>-->
+<!--    <form action="phone/getId" method="get">-->
+<!--      <div>-->
+<!--        <input class="idd" type="text" name="id">-->
+<!--        <input type="submit" name="Get Info">-->
+<!--      </div>-->
+<!--    </form>-->
+<!--    <form action="phone/create" method="post">-->
+<!--      <div>-->
+<!--        <input type="text" name="model">-->
+<!--        <input type="text" name="color">-->
+<!--        <input type="text" name="ram">-->
+<!--        <input type="text" name="memory">-->
+<!--        <input type="text" name="price">-->
+<!--        <input type="submit" value="create">-->
+<!--      </div>-->
+<!--    </form>-->
+<!--    <form action="api/household">-->
+<!--      <div>-->
+<!--        <input type="submit" value="Household">-->
+<!--      </div>-->
+<!--    </form>-->
+<!--    <form action="/api/gadjet">-->
+<!--      <div>-->
+<!--        <input type="submit" value="Gadjet">-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <form class="back" action="/">-->
+<!--      <div>-->
+<!--        <input type="submit" value="Back">-->
+<!--      </div>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

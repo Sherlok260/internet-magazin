@@ -17,31 +17,41 @@ public class PhoneController {
         this.phoneService = phoneService;
     }
 
-    @PostMapping("/phone")
-    public HttpEntity<?> create(@RequestBody Phone phone) {
+    @PostMapping("/phone/create")
+    public HttpEntity<?> create(@RequestParam String model,
+                                @RequestParam String color,
+                                @RequestParam String ram,
+                                @RequestParam String memory,
+                                @RequestParam String price) {
+        Phone phone = new Phone();
+        phone.setModel(model);
+        phone.setColor(color);
+        phone.setRam(ram);
+        phone.setMemory(memory);
+        phone.setPrice(price);
         phoneService.create(phone);
         return ResponseEntity.ok("Ma'lumot qo'shildi.");
     }
 
     @GetMapping("/phone")
-    public String phoneCard() {
+    public String phoneCard(Model model) {
+        model.addAttribute("phones", phoneService.getAll());
         return "phone";
     }
 
-    @GetMapping("/phone/getId")
-    public String getById(@RequestParam Long id, Model model) {
-        model.addAttribute("phone", phoneService.findById(id));
-        return "onePhone";
+    @GetMapping("/back")
+    public String back(){
+        return "index";
     }
-
-    @GetMapping("/phone/all")
-    public String getAll(Model model) {
-        model.addAttribute("phones", phoneService.getAll());
-        return "phones";
-    }
+//    @GetMapping("/phone/all")
+//    public String getAll(Model model) {
+//        model.addAttribute("phones", phoneService.getAll());
+//        return "phones";
+//    }
 
     @GetMapping("/")
     public String hello() {
-        return "hello";
+
+        return "index";
     }
 }
